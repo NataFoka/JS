@@ -1,0 +1,30 @@
+.button {
+	margin: 0px 10px 0px 10px;
+	border:2px solid #556B2F;
+	color: #556B2F;
+}
+.Stroka{
+	
+	height: 15px;
+        }
+        .cell{
+            margin: 0;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-left: 1px solid #556B2F;
+						border-bottom: 1px solid #556B2F;
+            z-index: 30;
+            transition: background-color 0.3s;
+        }
+				.snake{
+
+
+
+						background-color:#556B2F;
+        }
+				.food{
+					background-color:#FF0000;
+					box-shadow: 0 0 10px #000000 inset;
+					transition: background-color 2s;
+			}
