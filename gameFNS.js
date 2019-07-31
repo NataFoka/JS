@@ -97,17 +97,17 @@ alert
                         directx = 2;
                     }
                     break;
-                case KEY.right: //стрелка вправо
+                case 39: //стрелка вправо
                     if (direct != 2){
                         directx = 0;
                     }
                     break;
-                case KEY.up: //стрелка вверх
+                case 38: //стрелка вверх
                     if (direct != 1){
                         directx = 3;
                     }
                     break;
-                case KEY.down: //стрелка вниз
+                case 40: //стрелка вниз
                     if (direct != 3){
                         directx = 1;
                     }
