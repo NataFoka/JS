@@ -13,6 +13,20 @@ var textElem = document.createTextNode('Тут был я');
 var button1=document.createElement("button");
 var button2=document.createElement("button");
 
+var snake = {
+        length : 3,
+        body : [[10,11],[10,12],[10,13]],
+        mySnake : function (){
+                    for ( let i = 0; i < this.length; i++){
+                        let BodySnake = this.body[i];
+                        document.getElementById(BodySnake.join()).className = 'cell snake';
+                    }
+                }
+              };
+
+
+
+
 div.innerHTML = "<strong>Игра змейка.</strong><br>";
 
 
@@ -41,15 +55,67 @@ function Start()
 GamePlane(20,25);
 
 function GamePlane (SizeX, SizeY){
-  for ( var x = 0; x < SizeX; x++){
+  for ( let x = 0; x < SizeX; x++){
     var Xpole = document.createElement('div');
       div2.appendChild(Xpole);
       Xpole.className = 'Stroka';
-      for (var y = 0; y < SizeY; y++){
-        var Ypole = document.createElement('div');
+      for (let y = 0; y < SizeY; y++){
+        let Ypole = document.createElement('div');
         Xpole.appendChild(Ypole);
         Ypole.className = 'cell';
         Ypole.id = x+','+y;
       }
     }
+    snake.mySnake();
+    Tochka(SizeX,SizeY);
 }
+
+
+
+    function Tochka (SizeX, SizeY){
+
+        let x = Math.round(Math.random() * (SizeX-1));
+        let y = Math.round(Math.random() * (SizeY-1));
+        var food = document.getElementById(x+','+y);
+alert
+        if (food.className == 'cell'){
+            food.className = "cell food";
+        } else { //генерируем новую точку
+            Tochka(SizeX, SizeY);
+        }
+        return food;
+    }
+
+
+    //Обработчик нажатия кнопки
+        function keyHandler (event){
+          alert(event.keyCode);
+            switch (event.keyCode) {
+                case 37: //стрелка влево
+                alert("лево");
+                    if (direct != 0){
+                        directx = 2;
+                    }
+                    break;
+                case KEY.right: //стрелка вправо
+                    if (direct != 2){
+                        directx = 0;
+                    }
+                    break;
+                case KEY.up: //стрелка вверх
+                    if (direct != 1){
+                        directx = 3;
+                    }
+                    break;
+                case KEY.down: //стрелка вниз
+                    if (direct != 3){
+                        directx = 1;
+                    }
+                    break;
+                default :
+                    return;
+            }
+        }
+
+
+window.addEventListener('keydown', keyHandler);
