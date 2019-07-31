@@ -119,3 +119,9 @@ alert
 
 
 window.addEventListener('keydown', keyHandler);
+
+setInterval(func, 1000);
+
+function func() {
+  alert( 'Привет' );
+}
