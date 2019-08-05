@@ -93,25 +93,13 @@ alert
             switch (event.keyCode) {
                 case 37: //стрелка влево
                 alert("лево");
-                    if (direct != 0){
-                        directx = 2;
-                    }
-                    break;
+                   
                 case 39: //стрелка вправо
-                    if (direct != 2){
-                        directx = 0;
-                    }
-                    break;
+                
                 case 38: //стрелка вверх
-                    if (direct != 1){
-                        directx = 3;
-                    }
-                    break;
+                
                 case 40: //стрелка вниз
-                    if (direct != 3){
-                        directx = 1;
-                    }
-                    break;
+                   
                 default :
                     return;
             }
