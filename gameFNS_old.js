@@ -6,9 +6,9 @@ var div = document.createElement('div');
 var div2 = document.createElement('div');
 
 var button1=document.createElement("button");
+var button2=document.createElement("button");
 
-
-div.innerHTML = "<strong>Игра змейка.</strong>";
+div.innerHTML = "<strong>Игра змейка.</strong><br>";
 div.style="width: 400px;  color: #6B8E23; height:70px; display:inline-block; vertical-align: top; margin: 0px 80px 0px 10px; font-size: 24px; text-align: center; padding: 10px;";
 div2.style="background: url('209.jpg'); width: 400px; border:2px solid #556B2F;  height:300px;   display:inline-block; vertical-align: middle";
 
@@ -17,10 +17,17 @@ button1.className = "button";
 button1.onclick = Start;
 div.appendChild(button1);
 
+button2.innerHTML = "Конец игры";
+button2.className = "button";
+div.appendChild(button2);
 
 document.body.appendChild(div);
 document.body.appendChild(div2);
 
+function Start()
+{
+  alert("Не работает пока!");
+}
 
 
 //Функционал игры
@@ -31,8 +38,6 @@ var SdvigPriMove = [
     [0,-1], //влево 2
     [-1,0]]; //вверх 3
 
-var GoGame;
-var timer = 300;
 var napravlenie = 0;
 var SizeX = 20;
 var SizeY = 25;
@@ -46,9 +51,9 @@ var snake = {
                     }
                 },
         move : function (){
-                 var NewSnake = this.body[this.length-1].map((value, index) =>
-                   value + SdvigPriMove[napravlenie][index]
-                 );
+                 var NewSnake = this.body[this.length-1].map(function(value, index){
+                   return value + SdvigPriMove[napravlenie][index]
+                 });
                  Game(NewSnake, this.body);
 
               }
@@ -56,6 +61,7 @@ var snake = {
 
 GamePlane(SizeX,SizeY);
 window.addEventListener('keydown', key);
+GoGame = setInterval(func, 100);
 
 function Game (NewSnake, body) {
   var Sled = document.getElementById(NewSnake.join());
@@ -73,16 +79,11 @@ function Game (NewSnake, body) {
       body.push(NewSnake);
       Sled.className = 'cell snake';
       Tochka(SizeX, SizeY);
-      if ((snake.length-3)%5 == 0) {
-        clearInterval(GoGame);
-        GoGame = setInterval(func, timer-50);
-      }
-
     }
     else {
       if ( Sled == null  || Sled.className == 'cell snake'){
         clearInterval(GoGame);
-        alert(`Вы проиграли! Ваш счет: ${snake.length-3} . Нажмите кнопку «Сбросить» для начала новой игры!`);
+        alert('Вы проиграли! Ваш счет: ' + (snake.length-3) + '. Нажмите кнопку «Сбросить» для начала новой игры!');
       }
     }
   }
@@ -101,18 +102,7 @@ function GamePlane (SizeX, SizeY){
       }
     }
     snake.mySnake();
-    //Tochka(SizeX,SizeY);
-}
-
-
-
-function OchistitPole (SizeX, SizeY){
-  for ( let x = 0; x < SizeX; x++){
-      for (let y = 0; y < SizeY; y++){
-        let Ypole = document.getElementById(x+','+y);
-        Ypole.className = 'cell';
-      }
-    }
+    Tochka(SizeX,SizeY);
 }
 
 function Tochka (SizeX, SizeY){
@@ -162,19 +152,4 @@ function key (event){
 
 function func() {
   snake.move();
-}
-
-//GoGame = setInterval(/func, 100);
-
-function Start()
-{
-  //отчистить поле
-OchistitPole (SizeX, SizeY);
-Tochka(SizeX, SizeY);
-napravlenie = 0;
-snake.body = [[10,0],[10,1],[10,2]];
-snake.length = 3;
-snake.mySnake();
-clearInterval(GoGame);
-GoGame = setInterval(func, timer);
 }
